@@ -2,19 +2,22 @@
 // import { useState } from 'react'
 import Header from "./component/Header";
 import "./index.css";
-import logoImage from "./assets/apala-logo1.svg";
+import logoImage from "./assets/apala-logo.svg";
 import Banner from "./assets/Banner.jpg";
 import prev from "./assets/Button-Prev.svg";
 import next from "./assets/Button-Next.svg";
-import testimoni from "./assets/testimoni.jpg";
+import testimoniImage from "./assets/testimoni.jpg";
 import Facebook from "./assets/Facebook.svg";
 import instagram from "./assets/Instagram.svg";
 import twitter from "./assets/Twitter.svg";
 import youtube from "./assets/Youtube.svg";
 import mail from "./assets/mail.svg";
 import chat from "./assets/chat_bubble.svg";
+import { useState } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const [slide, setSlide] = useState(0);
   const myStyle = {
     backgroundImage: `url(${Banner})`,
     backgroundSize: "cover",
@@ -60,28 +63,44 @@ function App() {
         "Kami menggunakan teknologi modern seperti latihan real-time dan feedback otomatis untuk pengalaman belajar yang lebih efektif.",
     },
   ];
+  const testimoni = [
+    {
+      graduate: "Kelas Drum",
+      reason:
+        "Kami menggunakan teknologi modern seperti latihan real-time dan feedback otomatis untuk pengalaman belajar yang lebih efektif.",
+      name: "Daniel",
+      position: "Pemimpin - SMK Satu Nusa",
+    },
+    {
+      graduate: "Kelas Piano",
+      reason:
+        "Platform ini sangat membantu saya memahami teknik dasar piano dengan mudah. Materinya lengkap, dan video tutorialnya sangat jelas. Saya sekarang lebih percaya diri dalam bermain piano!",
+      name: "Dororo",
+      position: "Siswa - SMK Wikrama Bogor",
+    },
+  ];
   return (
     <>
-      <div className="">
+      <div className="container">
         <nav className="flex justify-between bg-black text-center gap-2 min-w-full content-around font-bold  px-10 py-10 text-white">
           <div className="logo w-1/12 self-center">
             <img src={logoImage} alt="logo-apala" />
           </div>
           <ul className="quick-link flex justify-around self-center w-9/12  px-10 ">
             <li>
-              <a href="">Beranda</a>
+              <a href="#Beranda">Beranda</a>
             </li>
             <li>
-              <a href="">Kelas</a>
+              <a href="#Kelas">Kelas</a>
             </li>
             <li>
-              <a href="">Berlangganan</a>
+              <a href="#Berlangganan">Berlangganan</a>
             </li>
             <li>
-              <a href="">Testimoni</a>
+              <a href="#Testimoni">Testimoni</a>
             </li>
             <li>
-              <a href="">Kontak</a>
+              <a href="#Kontak">Kontak</a>
             </li>
           </ul>
           <ul className="Auth-link w-2/12 grid grid-cols-2 gap-5 self-center">
@@ -99,7 +118,10 @@ function App() {
             </a>
           </ul>
         </nav>
-        <header className="container px-6 font-inter max-w-md mx-auto sm:max-w-xl md:max-w-5xl lg:flex lg:max-w-full lg:p-0 text-white bg-black">
+        <header
+          className="container px-6 font-inter max-w-md mx-auto sm:max-w-xl md:max-w-5xl lg:flex lg:max-w-full lg:p-0 text-white bg-black"
+          id="Beranda"
+        >
           <div className="lg:p-12 lg:flex-1 self-center">
             <h3 className="text-4xl font-bold  sm:text-3xl md:text-3xl">
               Belajar Musik Online dengan Cara yang Mudah & Menyenangkan!{" "}
@@ -132,7 +154,7 @@ function App() {
           </div>
         </header>
         {/* Section 1 - Learning Path */}
-        <section className="Learning-path min-h-full py-10">
+        <section className="Learning-path min-h-full py-10" id="Kelas">
           <div className="title-section text-black text-center ">
             <h1 className="font-bold text-3xl">Learning Path</h1>
             <p className="font-semibold mt-10 ">
@@ -145,6 +167,7 @@ function App() {
               src={prev}
               alt="tombol-sebelumnya"
               className="outline-black rounded-full outline-2 self-center cursor-pointer "
+              onClick={(e) => e.target.velue}
             />
             {pathaways.map((path, i) => (
               <div
@@ -205,7 +228,7 @@ function App() {
               className="outline-black rounded-full outline-2 self-center cursor-pointer"
             />
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3" id="Berlangganan">
             <div className="grid grid-cols-3">
               {classSteps.map((item, i) => (
                 <div
@@ -344,7 +367,7 @@ function App() {
           </div>
         </section>
         {/* Section 5 - Testimoni */}
-        <section className="Testimoni min-h-full p-10">
+        <section className="Testimoni min-h-full p-10" id="Testimoni">
           <div className="title flex justify-between">
             <h1 className="text-3xl font-bold">Apa Kata Mereka ?</h1>
             <div className="flex justify-between w-1/9">
@@ -352,32 +375,36 @@ function App() {
                 src={prev}
                 alt="tombol-sebelumnya"
                 className="outline-black rounded-full outline-2 self-center cursor-pointer w-1/3"
+                onClick={(e) => setSlide(slide - 1)}
               />
               <img
                 src={next}
                 alt="tombol-selanjutnya"
                 className="outline-black rounded-full outline-2 self-center cursor-pointer w-1/3"
+                onClick={(e) => slide == testimoni.length ? setSlide(slide + 1) : setSlide(slide + 1)}
               />
             </div>
           </div>
           <div className="card relative flex flex-col md:flex-row w-full my-6 bg-blue-500 shadow-sm border border-slate-200 rounded-lg">
             <div className="p-6">
               <div className="mb-4 rounded-full bg-blue-800 py-1 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-1/4 font-semibold">
-                Lulusan Kelas Musik Drum
+                {testimoni[slide].graduate}
               </div>
               <h4 className="mb-2 text-white text-2xl font-semibold">
-                "Platform ini sangat membantu saya memahami teknik dasar piano
-                dengan mudah. Materinya lengkap, dan video tutorialnya sangat
-                jelas. Saya sekarang lebih percaya diri dalam bermain piano!"
+                {testimoni[slide].reason}
               </h4>
-              <p className="font-semibold text-white pt-24">Daniel Rosmana</p>
+              <p className="font-semibold text-white pt-24">
+                {" "}
+                {testimoni[slide].name}
+              </p>
               <p className="font-semibold text-white">
-                Siswa - SMK Wikrama Bogor
+                {testimoni[slide].position}
+                
               </p>
             </div>
             <div className="relative p-2.5 md:w-2/5 shrink-0 overflow-hidden">
               <img
-                src={testimoni}
+                src={testimoniImage}
                 alt="card-image"
                 className="h-full w-full rounded-md md:rounded-lg object-cover"
               />
@@ -385,7 +412,10 @@ function App() {
           </div>
         </section>
         {/* Section 6 - Contact */}
-        <section className="contact h-[450px] bg-blue-600 grid grid-cols-3 gap-5 p-10 text-white">
+        <section
+          className="contact h-[450px] bg-blue-600 grid grid-cols-3 gap-5 p-10 text-white"
+          id="Kontak"
+        >
           <div className="Detail grid grid-rows-3 gap-2">
             <div className="flex items-center justify-between">
               <img src={logoImage} alt="ImageLogo" />
