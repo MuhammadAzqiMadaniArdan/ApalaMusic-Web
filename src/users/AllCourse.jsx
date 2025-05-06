@@ -82,7 +82,7 @@ const AllCourse = () => {
             <div className="flex-1 p-6 overflow-auto">
                 <div className="bg-white rounded-2xl p-6 shadow-md h-full">
                     <div className="flex justify-between items-center mb-6">
-                        <h1 className="text-4xl font-bold text-purple-600">All Course</h1>
+                        <h1 className="text-4xl font-bold text-blue-900 ml-5">All Course</h1>
                         <div className="flex items-center gap-2">
                             <img
                                 src="https://i.pravatar.cc/40"
